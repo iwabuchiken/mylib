@@ -1,4 +1,4 @@
-package MYLIB;
+package mylib;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,13 +7,19 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
+import myapp.image.gallery.ImageFromGalleryActivity;
+
 //import myapp.homebase2.MyLib.FTPManager;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.widget.Toast;
 
 //import org.apache.commons.net.ftp.FTPClient;
@@ -253,5 +259,50 @@ public class MyLib {
 	   	 dialog.show();
 	   	 
 	}//showTextDialog()
+
+	/**
+	 * 
+	 * @param context
+	 * @param data
+	 * @return
+	 * 	source: http://www.androidsnippets.com/get-file-path-of-gallery-image
+	 */
+	public static String getDevicePath(Activity context, Uri data) {
+		// TODO 自動生成されたメソッド・スタブ
+		 // can post image
+        String [] proj={MediaStore.Images.Media.DATA};
+        Cursor cursor = context.managedQuery( data,
+                        proj, // Which columns to return
+                        null,       // WHERE clause; which rows to return (all rows)
+                        null,       // WHERE clause selection arguments (none)
+                        null); // Order-by clause (ascending by name)
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+
+        return cursor.getString(column_index);
+//		return null;
+	}//public static String getDevicePath(Activity context, Uri data)
+	
+	/**
+	 * 
+	 * @param context
+	 * @param message
+	 * @param length
+	 * 		1 ==> Short
+	 * 		2 ==> Long
+	 */
+	public static void showToast(Activity context, String message, int length) {
+		// set length
+		int toastLength = Toast.LENGTH_SHORT;
+		
+		if (length == 2) {
+			toastLength = Toast.LENGTH_LONG;
+		}//if (length == 1)
+		
+		// toast
+		Toast.makeText(context, 
+				message, 
+				toastLength).show();
+	}//public static void showToast(Context context, String message, int length)
 	
 }//public class MyLib
