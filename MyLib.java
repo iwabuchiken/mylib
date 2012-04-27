@@ -1,4 +1,4 @@
-package myapp.tweetappsample;
+package MYLIB;
 
 import java.io.IOException;
 import java.io.InputStream;

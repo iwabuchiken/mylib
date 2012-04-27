@@ -1,4 +1,4 @@
-package myapp.ftpsample;
+package MYLIB;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
