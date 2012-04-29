@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
-import myapp.image.gallery.ImageFromGalleryActivity;
+//import myapp.image.gallery.ImageFromGalleryActivity;
 
 //import myapp.homebase2.MyLib.FTPManager;
 
