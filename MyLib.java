@@ -1,11 +1,10 @@
 package mylib;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.SocketException;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import myapp.timerapp.R;
 
 //import myapp.image.gallery.ImageFromGalleryActivity;
 
@@ -15,17 +14,72 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
+import android.widget.TextView;
 import android.widget.Toast;
 
 //import org.apache.commons.net.ftp.FTPClient;
 //import org.apache.commons.net.ftp.FTPReply;;
 
 public class MyLib {
+	/* Fields
+	 * 	charSource:String		=> 
+	 * 	timer:Timer				=> countDown()
+	 * 	task:TimerTask			=> countDown()
+	 */
+	
+	private static Handler handler = new Handler() {
+		public  void handleMessage(Message msg) {
+			showToast((Activity)MyLib.context, (String)msg.obj, 1);
+		}//handleMessage()
+	};
+	
+	// task
+	private static TimerTask task = new TimerTask() {
+
+		@Override
+		public void run() {
+			
+//			//Debug
+//			showToast((Activity)context, String.valueOf(R.id.current_time), 1);
+			
+//			// TODO 自動生成されたメソッド・スタブ
+////			TextView tv = (TextView) ((Activity) context).findViewById(R.id.current_time);
+//			TextView tv = (TextView) ((Activity) MyLib.context).findViewById(R.id.current_time);
+//			
+//			// Get the current time
+//			Integer currentTime = (Integer) Integer.parseInt(tv.getText().toString());
+//			
+//			// Toast time
+//			
+////			showToast((Activity)context, tv.getText().toString(), 1);
+//			
+//			// Decrement the current time
+//			if (currentTime < 1) {
+//				timer.cancel();
+//				timer.purge();
+//			} else {//if (currentTime < 1)
+//				currentTime -= 1;
+//				tv.setText(String.valueOf(currentTime));
+//			}//if (currentTime < 1)
+//			
+		}
+		
+	};
+	
+//	// handler
+//	private static Handler handler = new Handler() {
+//		
+//	};
+	
+	// timer
+	private static Timer timer = null;
 	
 	// String for "generatePassword()"
 	static String charSource = "abcdefghijklmn";
@@ -40,7 +94,8 @@ public class MyLib {
 	
 	// constructor
 	public MyLib(Context context) {
-		this.context = context;
+		MyLib.context = context;
+//		this.context = context;
 	}//public MyLib()
 	
 	// generate a password
@@ -51,13 +106,13 @@ public class MyLib {
 		
 		// get chars
 		Random rd;
-		int judge;
+//		int judge;
 		for (int i = 0; i < 5; i++) {
 			// instance
 			rd = new Random((long) (Math.random()*1000000));
 			
 			// alphabet or number ?
-			judge = rd.nextInt(2);
+//			judge = rd.nextInt(2);
 			
 			
 			// get a char
@@ -185,7 +240,7 @@ public class MyLib {
 	
 	public static boolean isUniformString(String targetString) {
 		// get the type of the first char in the string
-		int firstCharType = Character.getType(targetString.charAt(0));
+//		int firstCharType = Character.getType(targetString.charAt(0));
 		
 		// flag: default => false (assumes the string is not uniform)
 //		boolean isSame = false;
@@ -304,5 +359,34 @@ public class MyLib {
 				message, 
 				toastLength).show();
 	}//public static void showToast(Context context, String message, int length)
+
+	public static void countDown(Context context, TextView tv) {
+		// Get an Intent
+		Intent intent	= new Intent((Activity) context, TimerService.class);
+		
+		
+//		//debug
+//		showToast((Activity)context, 
+////						"findViewById=" 
+//						"getText()="
+////									+ ((Activity) context).findViewById(R.id.current_time).toString(),
+////								+ ((TextView)((Activity) context).findViewById(R.id.current_time)).toString(),
+//								+ ((TextView)((Activity) context).findViewById(R.id.current_time))
+//										.getText().toString(),
+////						"R.id.current_time" + String.valueOf(R.id.current_time), 
+//						2);
+//		TextView tv = (TextView) ((Activity) context).findViewById(R.id.current_time);
+		
+		
+//		// Initialize timer
+//		timer = new Timer();
+//		
+//		// Set task
+//		//Debug
+//		timer.schedule(task, 1000, 5000);
+		
+//		timer.schedule(task, 1000, 1000);
+		
+	}
 	
 }//public class MyLib
