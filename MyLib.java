@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import myapp.timerapp.R;
+//import myapp.timerapp.R;
 
 //import myapp.image.gallery.ImageFromGalleryActivity;
 
